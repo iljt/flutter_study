@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_study/day4/NamedRoute2.dart';
 import 'package:flutter_study/day4/NewRoute.dart';
+import 'package:flutter_study/day6/TransformWidget.dart';
 
 import 'day4/NamedRoute1.dart';
 import 'day5/AliginLayout.dart';
@@ -14,6 +15,13 @@ import 'day5/RowAndColumnLayout.dart';
 import 'day5/RowLayout.dart';
 import 'day5/StackLayout.dart';
 import 'day5/WrapLayout.dart';
+import 'day6/ClipWidget.dart';
+import 'day6/ContainerWidget.dart';
+import 'day6/ConWidget.dart';
+import 'day6/DecoratedBoxWidget.dart';
+import 'day6/FittedBoxWidget.dart';
+import 'day6/PaddingWidget.dart';
+import 'day6/ScaffoldWidget.dart';
 
 
 void main() => runApp(const WidgetApp());
@@ -51,6 +59,14 @@ class WidgetApp extends StatelessWidget {
         "flex_page":(BuildContext context) => FlexLayout(text: ModalRoute.of(context)!.settings.arguments.toString()),
         "algin_page":(BuildContext context) => AliginLayout(text: ModalRoute.of(context)!.settings.arguments.toString()),
         "column_page":(BuildContext context) => ColumnLayout(text: ModalRoute.of(context)!.settings.arguments.toString()),
+        "contain_page":(BuildContext context) => const ConWidget(),
+        "pading_page":(BuildContext context) =>  PaddingWidget(text: ModalRoute.of(context)!.settings.arguments.toString()),
+        "decoratedbox_page":(BuildContext context) => DecoratedBoxWidget(text: ModalRoute.of(context)!.settings.arguments.toString()),
+        "transform_page":(BuildContext context) => TransformWidget(text: ModalRoute.of(context)!.settings.arguments.toString()),
+        "container_page":(BuildContext context) => ContainerWidget(text: ModalRoute.of(context)!.settings.arguments.toString()),
+        "clip_page":(BuildContext context) => ClipWidget(text: ModalRoute.of(context)!.settings.arguments.toString()),
+        "fittedBox_page":(BuildContext context) => FittedBoxWidget(text: ModalRoute.of(context)!.settings.arguments.toString()),
+        "scaffold_page":(BuildContext context) => const ScaffoldWidget(),
         //假设我们也想将上面路由传参示例中的NewRoute路由页注册到路由表中，以便也可以通过路由名来打开它。但是，由于NewRoute接受一个text 参数，我们在不改变NewRoute源码的前提下适配这种情况
         "new_route": (context){
           return NewRoute(text: ModalRoute.of(context)!.settings.arguments.toString());
@@ -118,7 +134,9 @@ class _BaseWidgetState extends State<BaseWidgetPage>{
 
   @override
   Widget build(BuildContext context) {
-
+    var img= const NetworkImage(
+      "http://img.zcool.cn/community/01a7f7590cd5a3a8012145509a8335.jpg@2o.jpg",
+    );
     return  Scrollbar(
         child: SingleChildScrollView(
       //横向滑动
@@ -136,20 +154,122 @@ class _BaseWidgetState extends State<BaseWidgetPage>{
           ],
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
               const Image(image: AssetImage('assets/images/home/icon_home_add.png')),
+              //构造函数
               Image.asset('assets/images/home/icon_home_menu.png'),
             //  image,
-              const Icon(Icons.add,  size: 100,color: Colors.red),
+              const Icon(Icons.add,  size: 50,color: Colors.red),
 
             _flutterLogo(),
+            const Image(
+              image: NetworkImage('http://img.zcool.cn/community/01a7f7590cd5a3a8012145509a8335.jpg@2o.jpg'),
+              width: 50.0,
+              height: 50.0,
+              ),
+            //构造函数
             Image.network(
               "http://img.zcool.cn/community/01a7f7590cd5a3a8012145509a8335.jpg@2o.jpg",
-              width: 100.0,
-              height: 100.0,
+              width: 50.0,
+              height: 50.0,
             )
           ],
+        ),
+        ///Image构造函数
+        ///const Image({
+        ///   ...
+        ///   this.width, //图片的宽
+        ///   this.height, //图片高度
+        ///   this.color, //图片的混合色值
+        ///   this.colorBlendMode, //混合模式
+        ///   this.fit,//缩放模式
+        ///   this.alignment = Alignment.center, //对齐方式
+        ///   this.repeat = ImageRepeat.noRepeat, //重复方式
+        ///   ...
+        /// })
+        /// width、height：用于设置图片的宽、高，当不指定宽高时，图片会根据当前父容器的限制，尽可能的显示其原始大小，如果只设置width、height的其中一个，那么另一个属性默认会按比例缩放，但可以通过下面介绍的fit属性来指定适应规则。
+        /// fit：该属性用于在图片的显示空间和图片本身大小不同时指定图片的适应模式。适应模式是在BoxFit中定义，它是一个枚举类型，有如下值：
+        /// fill：会拉伸填充满显示空间，图片本身长宽比会发生变化，图片会变形。
+        ///cover：会按图片的长宽比放大后居中填满显示空间，图片不会变形，超出显示空间部分会被剪裁。
+        ///contain：这是图片的默认适应规则，图片会在保证图片本身长宽比不变的情况下缩放以适应当前显示空间，图片不会变形。
+        ///fitWidth：图片的宽度会缩放到显示空间的宽度，高度会按比例缩放，然后居中显示，图片不会变形，超出显示空间部分会被剪裁。
+        ///fitHeight：图片的高度会缩放到显示空间的高度，宽度会按比例缩放，然后居中显示，图片不会变形，超出显示空间部分会被剪裁。
+        ///none：图片没有适应策略，会在显示空间内显示图片，如果图片比显示空间大，则显示空间只会显示图片中间部分
+
+        SingleChildScrollView(
+            child: Column(
+            children: <Image>[
+                Image(
+                  image: img,
+                  height: 50.0,
+                  width: 100.0,
+                  fit: BoxFit.fill,
+                ),
+                Image(
+                  image: img,
+                  height: 50,
+                  width: 50.0,
+                  fit: BoxFit.contain,
+                ),
+                Image(
+                  image: img,
+                  width: 100.0,
+                  height: 50.0,
+                  fit: BoxFit.cover,
+                ),
+                Image(
+                  image: img,
+                  width: 100.0,
+                  height: 50.0,
+                  fit: BoxFit.fitWidth,
+                ),
+                Image(
+                  image: img,
+                  width: 100.0,
+                  height: 50.0,
+                  fit: BoxFit.fitHeight,
+                ),
+                Image(
+                  image: img,
+                  width: 100.0,
+                  height: 50.0,
+                  fit: BoxFit.scaleDown,
+                ),
+                Image(
+                  image: img,
+                  height: 50.0,
+                  width: 100.0,
+                  fit: BoxFit.none,
+                ),
+                Image(
+                  image: img,
+                  width: 100.0,
+                  color: Colors.blue,
+                  colorBlendMode: BlendMode.difference,
+                  fit: BoxFit.fill,
+                ),
+                Image(
+                  image: img,
+                  width: 100.0,
+                  height: 200.0,
+                  repeat: ImageRepeat.repeatY ,
+                 )
+                ].map((e){
+                return Row(
+                    children: <Widget>[
+                        Padding(
+                            padding: EdgeInsets.all(16.0),
+                            child: SizedBox(
+                            width: 100,
+                            child: e,
+                        ),
+                  ),
+                   Text(e.fit.toString())
+                  ],
+                 );
+                 }).toList()
+                ),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -239,18 +359,18 @@ class _BaseWidgetState extends State<BaseWidgetPage>{
             ),
             OutlinedButton.icon(
               icon: const Icon(Icons.add),
-              label: const Text("布局"),
+              label: const Text("布局组件"),
               onPressed: (){
-                print("添加");
-                Navigator.of(context).pushNamed("layout_page",arguments: "布局");
+                print("布局组件");
+                Navigator.of(context).pushNamed("layout_page",arguments: "布局组件");
 
               },
             ),
             TextButton.icon(
               icon: const Icon(Icons.info),
-              label: const Text("详情"),
+              label: const Text("容器组件"),
               onPressed: (){
-                print("详情");
+                Navigator.of(context).pushNamed("contain_page",arguments: "容器组件");
               },
             ),
           ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+///布局组件
 class Layout extends StatelessWidget{
   const Layout({super.key, required this.text});
   final String text;
