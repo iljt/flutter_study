@@ -1,0 +1,23 @@
+flutter create  --template=plugin --platforms=android,ios -i swift -a kotlin test_plugin2
+
+–template=plugin：创建插件包
+–platforms=android,ios：指定平台
+-i objc -a kotlin：指定ios和安卓的语言
+
+最后是工程名称，不指定平台的话创建出来的工程没有android目录~
+
+
+发布到pub
+dart pub publish --server=https://pub.dartlang.org
+报错1：Got socket error trying to find package get at https://pub.dev
+解决：https://stackoverflow.com/questions/76542313/got-socket-error-trying-to-find-package-get-at-https-pub-dev
+
+报错2：Package has 0 warnings and 1 hint.. Do you want to publish test_plugin 0.0.2 to https://pub.dev (y/N)? y
+Pub needs your authorization to upload packages on your behalf.
+In a web browser, go to https://accounts.google.com/o/oauth2/auth?access_type=offline&approval_prompt=force&response_type=code&client_id=818368855108-8grd2eg9tj9f38os6f1urbcvsq399u8n.app
+s.googleusercontent.com&redirect_uri=http%3A%2F%2Flocalhost%3A2000&code_challenge=UTr4NWLp2vwdIbMcqmHGOdVe9OgUWbbJ19Scx2vLP6Y&code_challenge_method=S256&scope=openid+https%3A%2F%2Fwww.go
+ogleapis.com%2Fauth%2Fuserinfo.email
+Then click "Allow access".
+解决：登录上面网址验证处理，还是报错：Error: Forbidden Your client does not have permission to get URL /authorized from this server.
+
+
