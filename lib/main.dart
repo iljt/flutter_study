@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_study/day4/NamedRoute2.dart';
 import 'package:flutter_study/day4/NewRoute.dart';
 import 'package:flutter_study/day6/TransformWidget.dart';
+import 'package:flutter_study/day7/TabBarViewTest.dart';
 
 import 'day4/NamedRoute1.dart';
 import 'day5/AliginLayout.dart';
@@ -22,6 +23,15 @@ import 'day6/DecoratedBoxWidget.dart';
 import 'day6/FittedBoxWidget.dart';
 import 'day6/PaddingWidget.dart';
 import 'day6/ScaffoldWidget.dart';
+import 'day7/AinimalListTest.dart';
+import 'day7/CustomScrollViewTest.dart';
+import 'day7/GirdViewTest.dart';
+import 'day7/ListViewTest.dart';
+import 'day7/NestedScrollViewTest.dart';
+import 'day7/PageViewTest.dart';
+import 'day7/ScrollControllerTest.dart';
+import 'day7/ScrollViewWidget.dart';
+import 'day7/SingleChildScrollViewTest.dart';
 
 
 void main() => runApp(const WidgetApp());
@@ -67,6 +77,17 @@ class WidgetApp extends StatelessWidget {
         "clip_page":(BuildContext context) => ClipWidget(text: ModalRoute.of(context)!.settings.arguments.toString()),
         "fittedBox_page":(BuildContext context) => FittedBoxWidget(text: ModalRoute.of(context)!.settings.arguments.toString()),
         "scaffold_page":(BuildContext context) => const ScaffoldWidget(),
+        "scrollview_page":(BuildContext context) => const ScrollViewWidget(),
+        "singlechildscroll_page":(BuildContext context) => SingleChildScrollViewTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
+        "listview_page":(BuildContext context) => ListViewTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
+        "scrollcontroller_page":(BuildContext context) => const ScrollControllerTest(),
+        "ainimallist_page":(BuildContext context) => const AinimalListTest(),
+        "girdview_page":(BuildContext context) => const GirdViewTest(),
+        "pageview_page":(BuildContext context) => PageViewTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
+        "tabbarview_page":(BuildContext context) => TabBarViewTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
+        "customScrollView_page":(BuildContext context) => CustomScrollViewTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
+        "nestedScrollView_page":(BuildContext context) => NestedScrollViewTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
+
         //假设我们也想将上面路由传参示例中的NewRoute路由页注册到路由表中，以便也可以通过路由名来打开它。但是，由于NewRoute接受一个text 参数，我们在不改变NewRoute源码的前提下适配这种情况
         "new_route": (context){
           return NewRoute(text: ModalRoute.of(context)!.settings.arguments.toString());
@@ -371,6 +392,13 @@ class _BaseWidgetState extends State<BaseWidgetPage>{
               label: const Text("容器组件"),
               onPressed: (){
                 Navigator.of(context).pushNamed("contain_page",arguments: "容器组件");
+              },
+            ),
+            TextButton.icon(
+              icon: const Icon(Icons.info),
+              label: const Text("可滚动组件"),
+              onPressed: (){
+                Navigator.of(context).pushNamed("scrollview_page",arguments: "ScrollView");
               },
             ),
           ],
