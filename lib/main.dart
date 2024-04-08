@@ -32,6 +32,14 @@ import 'day7/PageViewTest.dart';
 import 'day7/ScrollControllerTest.dart';
 import 'day7/ScrollViewWidget.dart';
 import 'day7/SingleChildScrollViewTest.dart';
+import 'day8/ColorAndThemeTest.dart';
+import 'day8/DialogTest.dart';
+import 'day8/FunctionWidget.dart';
+import 'day8/FutureBuilderAndStreamBuilderTest.dart';
+import 'day8/InheritedProviderTest.dart';
+import 'day8/InheritedWidgetTest.dart';
+import 'day8/ValueListenableBuilderTest.dart';
+import 'day8/WillPopScopeTest.dart';
 
 
 void main() => runApp(const WidgetApp());
@@ -87,6 +95,15 @@ class WidgetApp extends StatelessWidget {
         "tabbarview_page":(BuildContext context) => TabBarViewTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
         "customScrollView_page":(BuildContext context) => CustomScrollViewTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
         "nestedScrollView_page":(BuildContext context) => NestedScrollViewTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
+        "functionWidget_page":(BuildContext context) => const FunctionWidget(),
+        "willPopScope_page":(BuildContext context) => WillPopScopeTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
+        "colorAndTheme_page":(BuildContext context) => ColorAndThemeTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
+        "valueListenableBuilder_page":(BuildContext context) => ValueListenableBuilderTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
+        "futureBuilderAndStreamBuilder_page":(BuildContext context) => FutureBuilderAndStreamBuilderTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
+        "inheritedWidget_page":(BuildContext context) => InheritedWidgetTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
+        "dialog_page":(BuildContext context) => DialogTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
+        "inheritedProvider_page":(BuildContext context) => InheritedProviderTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
+
 
         //假设我们也想将上面路由传参示例中的NewRoute路由页注册到路由表中，以便也可以通过路由名来打开它。但是，由于NewRoute接受一个text 参数，我们在不改变NewRoute源码的前提下适配这种情况
         "new_route": (context){
@@ -399,6 +416,13 @@ class _BaseWidgetState extends State<BaseWidgetPage>{
               label: const Text("可滚动组件"),
               onPressed: (){
                 Navigator.of(context).pushNamed("scrollview_page",arguments: "ScrollView");
+              },
+            ),
+            TextButton.icon(
+              icon: const Icon(Icons.info),
+              label: const Text("功能型组件"),
+              onPressed: (){
+                Navigator.of(context).pushNamed("functionWidget_page",arguments: "FunctionWidget");
               },
             ),
           ],
