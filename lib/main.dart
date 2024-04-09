@@ -40,6 +40,14 @@ import 'day8/InheritedProviderTest.dart';
 import 'day8/InheritedWidgetTest.dart';
 import 'day8/ValueListenableBuilderTest.dart';
 import 'day8/WillPopScopeTest.dart';
+import 'day9/EventBusTest.dart';
+import 'day9/EventWidget.dart';
+import 'day9/GestureConflictTest.dart';
+import 'day9/GestureDetectorTest.dart';
+import 'day9/NotificationTest.dart';
+import 'day9/OriginPointEventTest.dart';
+import 'day9/WaterMaskTest.dart';
+import 'day9/eventbus/EventBus.dart';
 
 
 void main() => runApp(const WidgetApp());
@@ -103,6 +111,13 @@ class WidgetApp extends StatelessWidget {
         "inheritedWidget_page":(BuildContext context) => InheritedWidgetTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
         "dialog_page":(BuildContext context) => DialogTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
         "inheritedProvider_page":(BuildContext context) => InheritedProviderTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
+        "event_page":(BuildContext context) => const EventWidget(),
+        "pointEvent_page":(BuildContext context) => OriginPointEventTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
+        "gestureDetector_page":(BuildContext context) => GestureDetectorTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
+        "eventBus_page":(BuildContext context) => EventBusTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
+        "eventMechanism_page":(BuildContext context) => WaterMaskTest(),
+        "gestureConflict_page":(BuildContext context) => GestureConflictTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
+        "notification_page":(BuildContext context) => NotificationTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
 
 
         //假设我们也想将上面路由传参示例中的NewRoute路由页注册到路由表中，以便也可以通过路由名来打开它。但是，由于NewRoute接受一个text 参数，我们在不改变NewRoute源码的前提下适配这种情况
@@ -149,6 +164,10 @@ class _BaseWidgetState extends State<BaseWidgetPage>{
   @override
   void initState() {
     super.initState();
+    //监听登录事件
+    bus.on("loginSuccess", (arg) {
+      print("接收到EventBus消息= $arg");
+    });
   /*  getExternalStorageDirectory().then((path){
       setState(() {
         image = Image.file(File("${path?.path}${Platform.pathSeparator}icon_home_top.jpeg"));
@@ -168,6 +187,7 @@ class _BaseWidgetState extends State<BaseWidgetPage>{
     focusNode1.addListener((){
       print("focusNode1= ${focusNode1.hasFocus}");
     });
+
   }
 
   @override
@@ -423,6 +443,13 @@ class _BaseWidgetState extends State<BaseWidgetPage>{
               label: const Text("功能型组件"),
               onPressed: (){
                 Navigator.of(context).pushNamed("functionWidget_page",arguments: "FunctionWidget");
+              },
+            ),
+            TextButton.icon(
+              icon: const Icon(Icons.info),
+              label: const Text("事件处理与通知"),
+              onPressed: (){
+                Navigator.of(context).pushNamed("event_page",arguments: "事件处理与通知");
               },
             ),
           ],
