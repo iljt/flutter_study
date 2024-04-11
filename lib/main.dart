@@ -7,6 +7,13 @@ import 'package:flutter_study/day4/NewRoute.dart';
 import 'package:flutter_study/day6/TransformWidget.dart';
 import 'package:flutter_study/day7/TabBarViewTest.dart';
 
+import 'day10/AnimalBaseTest.dart';
+import 'day10/AnimalTest.dart';
+import 'day10/AnimalTransitionTest.dart';
+import 'day10/PageRouteTest.dart';
+import 'day10/SlideTransitionTest.dart';
+import 'day10/hero/HeroAnimationRouteA.dart';
+import 'day10/staggeranimation/StaggerAnimationTest.dart';
 import 'day4/NamedRoute1.dart';
 import 'day5/AliginLayout.dart';
 import 'day5/ColumnLayout.dart';
@@ -115,9 +122,16 @@ class WidgetApp extends StatelessWidget {
         "pointEvent_page":(BuildContext context) => OriginPointEventTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
         "gestureDetector_page":(BuildContext context) => GestureDetectorTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
         "eventBus_page":(BuildContext context) => EventBusTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
-        "eventMechanism_page":(BuildContext context) => WaterMaskTest(),
+        "eventMechanism_page":(BuildContext context) => const WaterMaskTest(),
         "gestureConflict_page":(BuildContext context) => GestureConflictTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
         "notification_page":(BuildContext context) => NotificationTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
+        "animal_page":(BuildContext context) => const AnimalTest(),
+        "baseAnimation_page":(BuildContext context) => AnimalBaseTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
+        "diyRouteSwitching_page":(BuildContext context) => PageRouteTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
+        "hero_page":(BuildContext context) => const HeroAnimationRouteA(),
+        "staggerAnimation_page":(BuildContext context) => StaggerAnimationTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
+        "animatedSwitcher_page":(BuildContext context) => SlideTransitionTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
+        "nanimatedTransition_page":(BuildContext context) => AnimalTransitionTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
 
 
         //假设我们也想将上面路由传参示例中的NewRoute路由页注册到路由表中，以便也可以通过路由名来打开它。但是，由于NewRoute接受一个text 参数，我们在不改变NewRoute源码的前提下适配这种情况
@@ -450,6 +464,13 @@ class _BaseWidgetState extends State<BaseWidgetPage>{
               label: const Text("事件处理与通知"),
               onPressed: (){
                 Navigator.of(context).pushNamed("event_page",arguments: "事件处理与通知");
+              },
+            ),
+            TextButton.icon(
+              icon: const Icon(Icons.info),
+              label: const Text("动画"),
+              onPressed: (){
+                Navigator.of(context).pushNamed("animal_page",arguments: "动画");
               },
             ),
           ],
