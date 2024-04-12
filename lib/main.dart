@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -14,6 +15,10 @@ import 'day10/PageRouteTest.dart';
 import 'day10/SlideTransitionTest.dart';
 import 'day10/hero/HeroAnimationRouteA.dart';
 import 'day10/staggeranimation/StaggerAnimationTest.dart';
+import 'day11/DioTest.dart';
+import 'day11/FileAndNet.dart';
+import 'day11/FileOperationTest.dart';
+import 'day11/HttpClientTest.dart';
 import 'day4/NamedRoute1.dart';
 import 'day5/AliginLayout.dart';
 import 'day5/ColumnLayout.dart';
@@ -57,7 +62,44 @@ import 'day9/WaterMaskTest.dart';
 import 'day9/eventbus/EventBus.dart';
 
 
-void main() => runApp(const WidgetApp());
+void main(){
+  var onError = FlutterError.onError; //先将 onerror 保存起来
+  FlutterError.onError = (FlutterErrorDetails details) {
+    onError?.call(details); //调用默认的onError
+    reportErrorAndLog(details); //上报
+  };
+  runZoned(
+        () => runApp(const WidgetApp()),
+    zoneSpecification: ZoneSpecification(
+      // 拦截print
+      print: (Zone self, ZoneDelegate parent, Zone zone, String line) {
+        collectLog(line);
+        parent.print(zone, "Interceptor: $line");
+      },
+      // 拦截未处理的异步错误
+      handleUncaughtError: (Zone self, ZoneDelegate parent, Zone zone,
+          Object error, StackTrace stackTrace) {
+       // reportErrorAndLog(details);
+        parent.print(zone, '${error.toString()} $stackTrace');
+      },
+    ),
+  );
+
+}
+
+void collectLog(String line){
+  //收集日志
+}
+void reportErrorAndLog(FlutterErrorDetails details){
+   //上报错误和日志逻辑
+}
+
+/*
+FlutterErrorDetails makeDetails(Object obj, StackTrace stack){
+  // 构建错误信息
+}
+*/
+
 
 class WidgetApp extends StatelessWidget {
 
@@ -132,6 +174,10 @@ class WidgetApp extends StatelessWidget {
         "staggerAnimation_page":(BuildContext context) => StaggerAnimationTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
         "animatedSwitcher_page":(BuildContext context) => SlideTransitionTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
         "nanimatedTransition_page":(BuildContext context) => AnimalTransitionTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
+        "fileAndNet_page":(BuildContext context) => const FileAndNet(),
+        "fileOpera_page":(BuildContext context) => FileOperationTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
+        "httpClient_page":(BuildContext context) => const HttpClientTest(),
+        "dio_page":(BuildContext context) => const DioTest(),
 
 
         //假设我们也想将上面路由传参示例中的NewRoute路由页注册到路由表中，以便也可以通过路由名来打开它。但是，由于NewRoute接受一个text 参数，我们在不改变NewRoute源码的前提下适配这种情况
@@ -155,6 +201,7 @@ class WidgetApp extends StatelessWidget {
 
 class BaseWidgetPage extends StatefulWidget {
   const BaseWidgetPage({super.key});
+
 
   @override
   State<StatefulWidget> createState() {
@@ -471,6 +518,13 @@ class _BaseWidgetState extends State<BaseWidgetPage>{
               label: const Text("动画"),
               onPressed: (){
                 Navigator.of(context).pushNamed("animal_page",arguments: "动画");
+              },
+            ),
+            TextButton.icon(
+              icon: const Icon(Icons.info),
+              label: const Text("文件操作与网络请求"),
+              onPressed: (){
+                Navigator.of(context).pushNamed("fileAndNet_page",arguments: "文件操作与网络请求");
               },
             ),
           ],
