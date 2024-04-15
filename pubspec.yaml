@@ -30,8 +30,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-
+  #支持国际化
+  flutter_localizations:
+    sdk: flutter
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
@@ -39,10 +40,14 @@ dependencies:
   english_words: ^4.0.0
   fluttertoast: ^8.2.4
   path_provider: ^2.1.2
+  #intl包主要是引用和加载intl_generator生成后的dart代码
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  #intl_generator 包主要包含了一些工具，它在开发阶段主要主要的作用是从代码中提取要国际化的字符串到单独的arb文件和根据arb文件生成对应语言的dart代码
+  intl_generator:  0.4.1
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

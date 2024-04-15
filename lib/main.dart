@@ -3,10 +3,13 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_study/day4/NamedRoute2.dart';
 import 'package:flutter_study/day4/NewRoute.dart';
 import 'package:flutter_study/day6/TransformWidget.dart';
 import 'package:flutter_study/day7/TabBarViewTest.dart';
+import 'package:flutter_study/util/AppLocalizations.dart';
+import 'package:flutter_study/util/AppLocalizationsDelegate.dart';
 
 import 'day10/AnimalBaseTest.dart';
 import 'day10/AnimalTest.dart';
@@ -108,6 +111,36 @@ class WidgetApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+       ///支持国际化
+       ///默认情况下，Flutter SDK中的组件仅提供美国英语本地化资源（主要是文本）。
+      ///要添加对其他语言的支持，应用程序须添加一个名为“flutter_localizations”的包依赖，然后还需要在MaterialApp中进行一些配置
+      ///下载flutter_localizations库，然后指定MaterialApp的localizationsDelegates和supportedLocales
+       localizationsDelegates: const [
+         // 本地化的代理类
+         ///Material 组件库提供的本地化的字符串和其他值，它可以使Material 组件支持多语言
+         GlobalMaterialLocalizations.delegate,
+         ///定义组件默认的文本方向，从左到右或从右到左，这是因为有些语言的阅读习惯并不是从左到右，比如如阿拉伯语就是从右向左的
+         GlobalWidgetsLocalizations.delegate,
+         //添加多语言支持 需要先注册AppLocalizationsDelegate类，然后再通过AppLocalizations.of(context)来动态获取当前Locale文本
+         // 注册我们的Delegate
+         ApplizationsDelegate(),
+        ],
+        supportedLocales: const [
+           ///Locale 类是用来标识用户的语言环境的，它包括语言和国家两个标志
+           Locale('en','US'),
+           Locale('zh','CN'),
+        ],
+        //使用Locale title
+        //这样，当在美国英语和中文简体之间切换系统语言时，APP的标题将会分别为“Flutter APP”和“Flutter应用”
+        //运行报错 Null check operator used on a null value
+        /* 原因是Localizations.of会从当前的context沿着widget树向顶部查找AppLocalizations，但是我们在MaterialApp中设置完AppLocalizationsDelegate后，实际上AppLocalizations是在当前context的子树中的，所以AppLocalizations.of(context)会返回null，报错。
+        那么我们该如何处理这种情况呢？其实很简单，我们只需要设置一个onGenerateTitle回调即可*/
+       //title: AppLocalizations.of(context)!.title,
+      onGenerateTitle: (context){
+        // 此时context在Localizations的子树中
+        return AppLocalizations.of(context)!.title;
+      },
+        //locale:const Locale('zh','CN') ,//手动指定locale
         onGenerateRoute:(RouteSettings settings){
 
           return MaterialPageRoute(builder: (context){
@@ -188,12 +221,12 @@ class WidgetApp extends StatelessWidget {
       },
       home:  Scaffold(
         appBar:  AppBar(
-          title:  const Text(
-            '基础Widget',
-            style: TextStyle(color: Colors.white),
+          title: const Text(
+            "基础Widget",
+            style: TextStyle(color: Colors.green),
           ),
         ),
-        body: const BaseWidgetPage(),
+        body: BaseWidgetPage(),
       ),
     );
   }
