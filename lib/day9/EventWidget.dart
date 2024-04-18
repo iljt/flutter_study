@@ -53,6 +53,9 @@ class _EventState extends State<EventWidget>{
                 TextButton(onPressed: () {
                   Navigator.of(context).pushNamed("notification_page",arguments: "Notification");
                 }, child: const Text("通知Notification")),
+                TextButton(onPressed: () {
+                  Navigator.of(context).pushNamed("inkWell_page",arguments: "InkWell");
+                }, child: const Text("InkWell")),
               ],
             )
         )

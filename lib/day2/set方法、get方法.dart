@@ -9,6 +9,10 @@ class Point{
   set x(int x) => _x=x;
 
   int get z => _z;//z是方法名
+  //相当于
+  /* int  z(){
+    return _z;
+  }*/
   set z(int z) => _z=z;
 /* //相当于
   set z(int z){

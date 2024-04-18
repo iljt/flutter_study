@@ -33,6 +33,21 @@ class IntlLocalizations {
       desc: 'Title for the Demo application',
     );
   }
+
+ /* //方式2
+  static final Map<String, Map<String, String>> _localizedValues = {
+    'en': {
+      'title': 'Hello World',
+    },
+    'es': {
+      'title': 'Hola Mundo',
+    },
+  };
+
+  String? get title1 {
+    return _localizedValues[locale.languageCode]['title'];
+  }
+  */
 }
 
 //Locale代理类
@@ -54,3 +69,4 @@ class IntlLocalizationsDelegate extends LocalizationsDelegate<IntlLocalizations>
   @override
   bool shouldReload(IntlLocalizationsDelegate old) => false;
 }
+

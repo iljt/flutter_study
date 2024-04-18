@@ -59,6 +59,7 @@ import 'day9/EventBusTest.dart';
 import 'day9/EventWidget.dart';
 import 'day9/GestureConflictTest.dart';
 import 'day9/GestureDetectorTest.dart';
+import 'day9/InkWellTest.dart';
 import 'day9/NotificationTest.dart';
 import 'day9/OriginPointEventTest.dart';
 import 'day9/WaterMaskTest.dart';
@@ -140,6 +141,10 @@ class WidgetApp extends StatelessWidget {
         // 此时context在Localizations的子树中
         return AppLocalizations.of(context)!.title;
       },
+        //英语系的国家非常多，如美国、英国、澳大利亚等，这些英语系国家虽然说的都是英语，但也会有一些区别。如果APP只想提供一种英语（如美国英语）供所有英语系国家使用则在localeListResolutionCallback中来做兼容
+      localeListResolutionCallback: (List<Locale>? locales, Iterable<Locale> supportedLocales){
+          // 判断当前locale是否为英语系国家，如果是直接返回Locale('en', 'US')
+      },
         //locale:const Locale('zh','CN') ,//手动指定locale
         onGenerateRoute:(RouteSettings settings){
 
@@ -211,6 +216,7 @@ class WidgetApp extends StatelessWidget {
         "fileOpera_page":(BuildContext context) => FileOperationTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
         "httpClient_page":(BuildContext context) => const HttpClientTest(),
         "dio_page":(BuildContext context) => const DioTest(),
+        "inkWell_page":(BuildContext context) => InkWellTest(text: ModalRoute.of(context)!.settings.arguments.toString()),
 
 
         //假设我们也想将上面路由传参示例中的NewRoute路由页注册到路由表中，以便也可以通过路由名来打开它。但是，由于NewRoute接受一个text 参数，我们在不改变NewRoute源码的前提下适配这种情况
