@@ -27,7 +27,7 @@ class WaterMaskTest extends StatelessWidget {
         wChild(1, Colors.white, 200),
         ///点击有反应
        IgnorePointer(child: WaterMark(
-         painter: TextWaterMarkPainter(text: 'xxxxxx', rotate: -20),
+         painter: TextWaterMarkPainter(text: 'xxxxxx', rotate: -30,padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 20)),
        ))
         ///点击没反应
        /* WaterMark(

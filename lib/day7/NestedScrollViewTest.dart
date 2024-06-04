@@ -19,7 +19,7 @@ class NestedScrollViewTest extends StatefulWidget{
 }
 class _NestedScrollViewState extends State<NestedScrollViewTest> {
   late TabController _tabController;
-  final _tabs = <String>['猜你喜欢', '今日特价', '发现更多'];
+  final _tabs = <String>['猜你喜欢', '今日特价', '发现更多', '发现更多啊'];
 
   @override
   void initState() {
@@ -138,6 +138,7 @@ class _NestedScrollViewState extends State<NestedScrollViewTest> {
                     snap: true,
                     forceElevated: innerBoxIsScrolled,
                     bottom: TabBar(
+                      tabAlignment: TabAlignment.center,
                       tabs: _tabs.map((String name) => Tab(text: name)).toList(),
                     ),
                   ),

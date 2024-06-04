@@ -248,7 +248,7 @@ class _DialogState extends State<DialogTest>{
                           height: 20,
                         ),
                         Text(
-                          '${status == '1' ? '取消发布' : '是否重新发布'}',
+                          status == '1' ? '取消发布' : '是否重新发布',
                           style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -276,7 +276,7 @@ class _DialogState extends State<DialogTest>{
                         ),
                        // MdGaps.line,
                         Container(
-                          color: Color(0XFFEEEEEE),
+                          color: const Color(0XFFEEEEEE),
                           width: 250,
                           height: 1,
                         ),
@@ -305,7 +305,7 @@ class _DialogState extends State<DialogTest>{
 
                             ),
                             Container(
-                              color: Color(0XFFEEEEEE),
+                              color: const Color(0XFFEEEEEE),
                               width: 1,
                               height: 36,
                             ),
@@ -316,7 +316,7 @@ class _DialogState extends State<DialogTest>{
                                     alignment: Alignment.center,
                                     padding: const EdgeInsets.symmetric(horizontal: 21),
                                     child: Text(
-                                      '${status == '1' ? '取消发布' : '重新发布'}',
+                                      status == '1' ? '取消发布' : '重新发布',
                                       style: const TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.w500,

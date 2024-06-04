@@ -16,7 +16,7 @@ class TabBarViewTest extends StatefulWidget{
 }
 class _TabBarViewState extends State<TabBarViewTest>  with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  List tabs = ["新闻", "历史", "图片"];
+  List tabs = ["新闻", "历史", "图片","娱乐", "体育", "发现"," 军事"];
 
   @override
   void initState() {
@@ -60,16 +60,19 @@ class _TabBarViewState extends State<TabBarViewTest>  with SingleTickerProviderS
         appBar: AppBar(
           title: const Text("DefaultTabController创建TabBarView"),
           bottom: TabBar(
-            tabs: tabs.map((e) => Tab(text: e)).toList(),
+            dividerHeight: 0,//去除底部黑线
+            isScrollable: true,
+            tabAlignment: TabAlignment.start,//isScrollable: true时去除左侧边距
+            tabs: tabs.map((element) => Tab(text: element)).toList(),
           ),
         ),
         body: TabBarView( //构建
-          children: tabs.map((e) {
+          children: tabs.map((element) {
             //缓存页面
             return KeepAliveWrapper(
               child: Container(
                 alignment: Alignment.center,
-                child: Text(e, textScaleFactor: 5),
+                child: Text(element, textScaleFactor: 5),
               ),
             );
           }).toList(),

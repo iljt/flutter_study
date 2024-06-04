@@ -33,18 +33,20 @@ class _ScaffoldWidgetState extends State<ScaffoldWidget> {
       drawer: const MyDrawer(), //抽屉
       bottomNavigationBar: BottomNavigationBar( // 底部导航
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.business), label: 'Business'),
-          BottomNavigationBarItem(icon: Icon(Icons.school), label: 'School'),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: '首页'),
+          BottomNavigationBarItem(icon: Icon(Icons.business), label: '导航'),
+          BottomNavigationBarItem(icon: Icon(Icons.school), label: '项目'),
         ],
         currentIndex: _selectedIndex,
         fixedColor: Colors.blue,
+        //显示模式
+        type: BottomNavigationBarType.fixed,
         onTap: _onItemTapped,
       ),
-      floatingActionButton: FloatingActionButton( //悬浮按钮
+    /*  floatingActionButton: FloatingActionButton( //悬浮按钮
           onPressed:_onAdd, //悬浮按钮
           child: const Icon(Icons.add)
-      ),
+      ),*/
     );
   }
   void _onItemTapped(int index) {
