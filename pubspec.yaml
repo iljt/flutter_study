@@ -41,7 +41,7 @@ dependencies:
   fluttertoast: ^8.2.4
   path_provider: ^2.1.2
   #intl包主要是引用和加载intl_generator生成后的dart代码
-  intl: ^0.18.1
+  intl: ^0.19.0
 
 dev_dependencies:
   flutter_test:
